@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 29. Apr 2019 um 17:35
+-- Erstellungszeit: 29. Apr 2019 um 17:38
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.3.3
 
@@ -66,8 +66,8 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `name`, `address`, `createdAt`, `updatedAt`) VALUES
-(1, 'witzel', 'Dr. med. Achim Witzel<br>\r\nMarktstätte 11<br>\r\n78462 Konstanz\r\n', '2019-04-29 14:08:13', '2019-04-29 14:08:13'),
-(2, 'denis-bau', 'DENIS Bauunternehmen<br>\r\nInh. Denis Omerbasic<br>\r\nRenchtalstr. 13<br>\r\n77704 Oberkirch-Nußbach', '2019-04-29 14:08:13', '2019-04-29 14:08:13');
+(1, 'client nr 1', 'John Doe<br>\r\nDankstreet 11<br>\r\n12345 Slowten\r\n', '2019-04-29 14:08:13', '2019-04-29 15:37:58'),
+(2, 'client nr 2', 'SV Boi<br>\r\nMr. sven boio<br>\r\ngheystreet. 13<br>\r\n42042 Benztown', '2019-04-29 14:08:13', '2019-04-29 15:38:46');
 
 -- --------------------------------------------------------
 
