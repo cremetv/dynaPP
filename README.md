@@ -1,2 +1,2 @@
-# erapid
-WIP api-like tool to manage impressum/datenschutz
+# dynaPP
+WIP Tool to manage privacy policys and data protection stuff
