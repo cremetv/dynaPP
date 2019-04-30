@@ -1,0 +1,107 @@
+nav {
+  background: $grey;
+  width: 5rem;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
+
+  .logo {
+    background: $black;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    font-size: 2rem;
+  }
+
+  .menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+
+    li {
+      position: relative;
+      z-index: 0;
+
+      a {
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+          color: $white;
+        }
+      }
+
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+      }
+
+      &:before {
+        width: 0;
+        background: darken($grey, 5%);
+        border-top-right-radius: .625rem;
+        border-bottom-right-radius: .625rem;
+        transition: width .25s $cubic;
+      }
+
+      &:hover {
+
+        &:before {
+          width: calc(100% - .5rem);
+        }
+      }
+
+      &.active {
+
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          z-index: -1;
+        }
+
+        &:before {
+          width: calc(100% - .5rem);
+          background: darken($grey, 8%);
+        }
+
+        &:after {
+          width: .25rem;
+          background: $main;
+        }
+      }
+    }
+  }
+
+  .settings {
+    transition: background .25s $cubic;
+
+    a {
+      width: 5rem;
+      height: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover {
+      background: darken($grey, 8%);
+    }
+  }
+}

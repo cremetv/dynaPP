@@ -86,31 +86,25 @@
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
           $checkId = $row['id'];
           $elementId = $row['elementId'];
-          $custom = $row['custom'];
           $position = $row['position'];
 
           ?>
-            <li><?=$id?> | element: <?=$elementId?> | custom: <?=$custom?> | position: <?=$position?></li>
+            <li><?=$id?> | element: <?=$elementId?> | position: <?=$position?></li>
           <?php
 
-          if ($custom == '1') {
-            $elTable = 'customs';
-            array_push($clientChecksCustom, $elementId);
-          } else {
-            $elTable = 'elements';
-            array_push($clientChecks, $elementId);
-          }
+          array_push($clientChecks, $elementId);
 
-          $sqlEl = "SELECT * FROM $elTable WHERE id = $elementId";
+          $sqlEl = "SELECT * FROM elements WHERE id = $elementId";
           $resultEl = $con->query($sqlEl);
 
           if ($resultEl->rowCount() > 0) {
             while ($row = $resultEl->fetch(PDO::FETCH_ASSOC)) {
               $elementName = $row['name'];
+              $elementCustom = $row['custom'];
               $elementDescription = $row['description'];
               $elementContent = $row['content'];
               ?>
-                <li><?=$elementName?> | <?=$elementDescription?></li>
+                <li><?=$elementName?> | custom: <?=$elementCustom?> | <?=$elementDescription?></li>
                 <hr>
               <?php
             }
@@ -136,9 +130,6 @@
 
     client checks:<br>
     <?php print_r($clientChecks); ?><br>
-
-    client checks custom:<br>
-    <?php print_r($clientChecksCustom); ?><br>
 
 
 
@@ -182,41 +173,6 @@
     ?>
 
 
-
-
-    <h3>Custom Fields:</h3>
-    <?php
-    $sql = "SELECT * FROM customs";
-    $result = $con->query($sql);
-
-    if ($result->rowCount() > 0) {
-      ?>
-        <ul>
-      <?php
-      while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        $elId = $row['id'];
-        $elName = $row['name'];
-        $elDescription = $row['description'];
-        $elContent = $row['content'];
-
-        if (in_array($elId, $clientChecksCustom)) {
-          $checked = 'active';
-        } else {
-          $checked = '';
-        }
-
-    	  ?>
-          <li class="<?=$checked?>"><?=$elName?></li>
-        <?php
-
-      }
-      ?>
-        </ul>
-      <?php
-    } else {
-      echo 'no custom elements entrys found';
-    }
-    ?>
 
 
 
