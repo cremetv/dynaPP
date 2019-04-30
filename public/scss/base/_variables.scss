@@ -1,0 +1,76 @@
+// Colors
+$main: #F0783C;
+
+$typo: #696969;
+$headings: #434343;
+$lighttypo: #D8D8D8;
+
+$header: #E9E9E9;
+$user: #DEDEDE;
+$body: #F2F2F2;
+
+$lightorange: #F5996C;
+$orange: #F0783C;
+$darkorange: #F0613C;
+
+$grey: #333333;
+$lightgrey: #F2F2F2;
+
+$white: #fff;
+$black: #000;
+
+$yellow: #FAC863;
+$red: #EC5F67;
+
+$error: #e74c3c;
+$success: #2ecc71;
+
+$fw-light: 300;
+$fw-normal: 400;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-black: 900;
+
+
+// Easing
+$cubic: cubic-bezier(.25,.46,.45,.94);
+
+
+// Shadows
+$depth-1: 0 2px 3px rgba(50,50,93,.2), 0 1px 2px rgba(0,0,0,.1); // action
+$depth-2: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08); // default
+$depth-3: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08); // hover
+
+// Shadows Top
+$depth-1-u: 0 -2px 3px rgba(50,50,93,.2), 0 -1px 2px rgba(0,0,0,.1); // action
+$depth-2-u: 0 -4px 6px rgba(50,50,93,.11), 0 -1px 3px rgba(0,0,0,.08); // default
+$depth-3-u: 0 -7px 14px rgba(50,50,93,.1), 0 -3px 6px rgba(0,0,0,.08); // hover
+
+
+//  Z-Index - Value based (map)
+$z-layers: (
+  '...':        0,
+);
+
+/* ------------------------------
+  Breakpoint Settings
+------------------------------ */
+// min or max
+$media-direction:   min;
+
+// Breakpoints
+// Sass Map for all Breakpoints
+// 0    - 479      default
+// 480  - 639      xs | mobile
+// 640  - 959       s | tablet
+// 960  - 1279      m | tablet
+// 1280 - 2079      l | desktop
+// 2080 +          xl | desktop
+$breakpoints: (
+  'default':        '',
+  'xs':             480px,
+  's':              640px,
+  'm':              960px,
+  'l':              1280px,
+  'xl':             2080px,
+);

@@ -1,0 +1,57 @@
+html {
+  width: 100%;
+  overflow-x: hidden;
+
+  &.overflow {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    @include breakpoint('m') {
+      padding-right: 17px;
+    }
+  }
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scrollbar {
+  @include scrollbar(8px);
+}
+
+html.grid-template {
+  height: 100%;
+
+  body {
+    height: 100%;
+    display: grid;
+    grid:
+      "nav header user" 5rem
+      "nav main sidebar" 1fr
+      / 5rem 1fr 25rem;
+
+    nav {
+      grid-area: nav;
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    main {
+      grid-area: main;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+    }
+
+    .user {
+      grid-area: user;
+    }
+  }
+}

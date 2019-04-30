@@ -1,0 +1,91 @@
+/* ------------------------------
+  Breakpoint Mixin
+------------------------------ */
+
+@mixin breakpoint($breakpoint, $direction: $media-direction) {
+
+  // is the value in the sass map?
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Output
+    @media only screen and (#{$direction}-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+
+  // if unit is not available add px
+  @else if unitless($breakpoint) {
+    $breakpoint: $breakpoint + 0px;
+
+    // Output
+    @media only screen and (#{$direction}-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+
+
+/* ------------------------------
+  Z-Index
+------------------------------ */
+@function z-index($name){
+    $z: null;
+    @if type-of($z-layers) == map { $z: map-get($z-layers, $name); }
+    @if type-of($z-layers) == list {
+        @for $i from 1 through length($z-layers) {
+            @if nth($z-layers, $i) == $name { $z: $i; }
+        }
+    }
+    @if $z { @return $z; }
+    @else { @error('Could not find a z-index for `#{$name}`'); }
+}
+@mixin z-index($name){ z-index: z-index($name); }
+
+
+
+
+@mixin scrollbar($size: 6px, $thumbColor: $lighttypo, $trackColor: lighten($lighttypo, 20), $borderRadius: 3px) {
+
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+
+    &-button {
+      width: 0px;
+      height: 0px;
+    }
+
+    &-thumb {
+      background: $thumbColor;
+      border: 0px none #ffffff;
+      border-radius: $borderRadius;
+
+      &:hover {
+        background: lighten($thumbColor, 5%);
+      }
+
+      &:active {
+        background: darken($thumbColor, 5%);
+      }
+    }
+
+    &-track {
+      background: $trackColor;
+      border: 0px none #ffffff;
+      border-radius: 0;
+
+      // &:hover {
+      //   background: lighten($trackColor, 5%);
+      // }
+      //
+      // &:active {
+      //   background: darken($trackColor, 5%);
+      // }
+    }
+
+    &-corner {
+      background: transparent;
+    }
+  }
+}
