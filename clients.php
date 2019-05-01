@@ -37,12 +37,65 @@
 
     <main>
 
+      <section class="box">
+        <div class="box__header">
+          <div class="box__header__title">
+            <h1>John Doe</h1>
+            <i class="material-icons success" data-tooltip="up to date" data-tooltip-position="right">check</i>
+          </div>
+          <div class="delete-client" data-tooltip="delete client">
+            <i class="material-icons">delete</i>
+          </div>
+        </div>
+
+        <div class="box__content">
+          <div class="entry">
+            <div class="entry__title">
+              <a href="#!">
+                Impresum
+              </a>
+            </div>
+            <div class="entry__date">
+              30.04.2019
+            </div>
+            <div class="entry__control--edit control">
+              <i class="material-icons">edit</i>
+            </div>
+            <div class="entry__control--delete control" data-tooltip="delete Impressum">
+              <i class="material-icons error">delete</i>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry__title">
+              <a href="#!">
+                Datenschutz
+              </a>
+            </div>
+            <div class="entry__date">
+              28.04.2019
+            </div>
+            <div class="entry__control--edit control">
+              <i class="material-icons">edit</i>
+            </div>
+            <div class="entry__control--delete control" data-tooltip="delete Datenschutz">
+              <i class="material-icons error">delete</i>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <div class="sidebar">
 
     </div>
 
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
     <script src="./public/js/main.min.js?v=<?=date("YmdGis", filemtime('./public/js/main.min.js'))?>"></script>
   </body>
 </html>

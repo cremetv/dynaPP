@@ -1,0 +1,144 @@
+.box {
+  width: 100%;
+  max-width: 900px;
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  .material-icons {
+    vertical-align: middle;
+    color: $lighttypo;
+    font-size: 2rem;
+    user-select: none;
+  }
+
+  .success {
+    color: $success;
+  }
+  .error {
+    color: $error;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+
+    &__title {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-end;
+
+      h1 {
+        margin: 0;
+        margin-right: 1rem;
+        font-size: 2.25rem;
+        color: $headings;
+        font-weight: $fw-bold;
+      }
+
+      i {
+        align-self: center;
+      }
+    }
+
+    .delete-client {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background .25s $cubic;
+
+      i {
+        transition: color .25s $cubic;
+      }
+
+      &:hover {
+        background: darken($white, 5%);
+
+        i {
+          color: $error;
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    .entry {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      padding: 1rem 0 0;
+      border-bottom: 1px solid $lighttypo;
+
+      &__title {
+        flex: 1;
+        color: $typo;
+        font-size: 1.5rem;
+        font-weight: $fw-bold;
+        margin-bottom: .5rem;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      &__date {
+        color: $lighttypo;
+        font-size: 1rem;
+        margin-bottom: .5rem;
+        font-weight: $fw-bold;
+        margin-right: 2rem;
+      }
+
+      .control {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background .25s $cubic;
+
+        &:hover {
+          background: darken($white, 5%);
+
+          &.entry__control--edit {
+            i {
+              color: darken($lighttypo, 30%);
+            }
+          }
+        }
+
+        + .control {
+          margin-left: .5rem;
+        }
+
+        i {
+          transition: color .25s $cubic;
+        }
+      }
+
+      &__control {
+
+        &--edit {
+
+        }
+
+        &--delete {
+
+        }
+      }
+    }
+  }
+}

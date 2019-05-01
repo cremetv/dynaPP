@@ -5,17 +5,17 @@
 
   <ul class="menu">
     <li>
-      <a href="#!">
+      <a href="#!" data-tooltip="elements" data-tooltip-position="right">
         <i class="material-icons">assignment</i>
       </a>
     </li>
     <li class="active">
-      <a href="#!">
+      <a href="#!" data-tooltip="clients" data-tooltip-position="right">
         <i class="material-icons">supervisor_account</i>
       </a>
     </li>
     <li>
-      <a href="#!">
+      <a href="#!" data-tooltip="log" data-tooltip-position="right">
         <i class="material-icons">history</i>
       </a>
     </li>

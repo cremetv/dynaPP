@@ -1,3 +1,8 @@
 main {
   background: $body;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  padding: 2.5rem 2rem;
 }
