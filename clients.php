@@ -37,58 +37,172 @@
 
     <main>
 
-      <section class="box">
-        <div class="box__header">
-          <div class="box__header__title">
-            <h1>John Doe</h1>
-            <i class="material-icons success" data-tooltip="up to date" data-tooltip-position="right">check</i>
-          </div>
-          <div class="delete-client" data-tooltip="delete client">
-            <i class="material-icons">delete</i>
-          </div>
-        </div>
+      <?php
+        $rechtUpdate = '2019-04-28 12:24:03';
+        $rechtUpdateTime = strtotime($rechtUpdate);
+      ?>
 
-        <div class="box__content">
-          <div class="entry">
-            <div class="entry__title">
-              <a href="#!">
-                Impresum
-              </a>
-            </div>
-            <div class="entry__date">
-              30.04.2019
-            </div>
-            <div class="entry__control--edit control">
-              <i class="material-icons">edit</i>
-            </div>
-            <div class="entry__control--delete control" data-tooltip="delete Impressum">
-              <i class="material-icons error">delete</i>
-            </div>
-          </div>
+      <?php
+        $sql = "SELECT * FROM clients";
+        $result = $con->query($sql);
 
-          <div class="entry">
-            <div class="entry__title">
-              <a href="#!">
-                Datenschutz
-              </a>
-            </div>
-            <div class="entry__date">
-              28.04.2019
-            </div>
-            <div class="entry__control--edit control">
-              <i class="material-icons">edit</i>
-            </div>
-            <div class="entry__control--delete control" data-tooltip="delete Datenschutz">
-              <i class="material-icons error">delete</i>
-            </div>
-          </div>
-        </div>
-      </section>
+        if ($result->rowCount() > 0) {
+          while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $clientId = $row['id'];
+            $clientName = $row['name'];
+            $clientAddress = $row['address'];
+            $clientCreatedAt = $row['createdAt'];
+            $clientUpdatedAt = $row['updatedAt'];
+
+            $outdatedImp = '';
+            $outdatedDat = '';
+
+            $resultImp = $con->prepare("SELECT * FROM impressum WHERE clientId = $clientId ORDER BY updatedAt LIMIT 1");
+            $resultImp->execute();
+            $rowImp = $resultImp->fetch();
+            if ($rowImp) {
+              $impressumUpdateTime = strtotime($rowImp['updatedAt']);
+              $impressumUpdate = date('d.m.Y H:i', $impressumUpdateTime);
+            } else {
+              $impressumUpdate = '-';
+            }
+
+            $resultDat = $con->prepare("SELECT * FROM datenschutz WHERE clientId = $clientId ORDER BY updatedAt DESC LIMIT 1");
+            $resultDat->execute();
+            $rowDat = $resultDat->fetch();
+            if ($rowDat) {
+              $datenschutzUpdateTime = strtotime($rowDat['updatedAt']);
+              $datenschutzUpdate = date('d.m.Y H:i', $datenschutzUpdateTime);
+            } else {
+              $datenschutzUpdate = '-';
+            }
+
+            if ($impressumUpdateTime < $rechtUpdateTime) {
+              $outdatedImp = 'outdated';
+            }
+            if ($datenschutzUpdateTime < $rechtUpdateTime) {
+              $outdatedDat = 'outdated';
+            }
+            ?>
+              <section class="box" client-id="<?=$clientId?>">
+                <div class="box__header">
+                  <div class="box__header__title">
+                    <h1><?=$clientName?></h1>
+                    <?php
+                      if ($impressumUpdate == '-' || $datenschutzUpdate == '-') {
+                        ?>
+                        <i class="material-icons error" data-tooltip="missing" data-tooltip-position="right">warning</i>
+                        <?php
+                      } else if ($outdatedImp == 'outdated' || $outdatedDat == 'outdated') {
+                        ?>
+                        <i class="material-icons warning" data-tooltip="not up to date" data-tooltip-position="right">error_outline</i>
+                        <?php
+                      } else {
+                        ?>
+                        <i class="material-icons success" data-tooltip="up to date" data-tooltip-position="right">check</i>
+                        <?php
+                      }
+                    ?>
+                  </div>
+                  <div class="delete-client" data-tooltip="delete client">
+                    <a href="#!">
+                      <i class="material-icons">delete</i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="box__content">
+                  <div class="entry">
+                    <div class="entry__title">
+                      <a href="#!">
+                        Impresum
+                      </a>
+                    </div>
+                    <div class="entry__date <?=$outdatedImp?>">
+                      <?=$impressumUpdate?>
+                    </div>
+                    <?php
+                      if ($impressumUpdate == '-') {
+                        ?>
+                          <div class="entry__control--add control" data-tooltip="add Impressum">
+                            <a href="#!">
+                              <i class="material-icons success">add</i>
+                            </a>
+                          </div>
+                        <?php
+                      } else {
+                        ?>
+                          <div class="entry__control--edit control">
+                            <a href="#!">
+                              <i class="material-icons">edit</i>
+                            </a>
+                          </div>
+                          <div class="entry__control--delete control" data-tooltip="delete Impressum">
+                            <a href="#!">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </div>
+                        <?php
+                      }
+                    ?>
+                  </div>
+
+                  <div class="entry">
+                    <div class="entry__title">
+                      <a href="#!">
+                        Datenschutz
+                      </a>
+                    </div>
+                    <div class="entry__date <?=$outdatedDat?>">
+                      <?=$datenschutzUpdate?>
+                    </div>
+                    <?php
+                      if ($datenschutzUpdate == '-') {
+                        ?>
+                          <div class="entry__control--add control" data-tooltip="add Datenschutz">
+                            <a href="#!">
+                              <i class="material-icons success">add</i>
+                            </a>
+                          </div>
+                        <?php
+                      } else {
+                        ?>
+                          <div class="entry__control--edit control">
+                            <a href="#!">
+                              <i class="material-icons">edit</i>
+                            </a>
+                          </div>
+                          <div class="entry__control--delete control" data-tooltip="delete Datenschutz">
+                            <a href="#!">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </div>
+                        <?php
+                      }
+                    ?>
+                  </div>
+                </div>
+              </section>
+            <?php
+          }
+        } else {
+          ?>
+            <section class="box">
+              <div class="box__empty">
+                <span>No clients found</span>
+                <a href="#!" class="btn">create new</a>
+              </div>
+            </section>
+          <?php
+        }
+      ?>
 
     </main>
 
     <div class="sidebar">
-
+      <div class="box">
+        Last update: <span><?=date('d.m.Y H:i', $rechtUpdateTime)?></span>
+      </div>
     </div>
 
     <script

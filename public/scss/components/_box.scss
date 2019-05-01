@@ -6,6 +6,10 @@
   flex-direction: column;
   padding: 2rem;
 
+  + .box {
+    margin-top: 2.5rem;
+  }
+
   .material-icons {
     vertical-align: middle;
     color: $lighttypo;
@@ -18,6 +22,19 @@
   }
   .error {
     color: $error;
+  }
+  .warning {
+    color: $yellow;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .btn {
+      margin-top: 2rem;
+    }
   }
 
   &__header {
@@ -40,6 +57,9 @@
         font-size: 2.25rem;
         color: $headings;
         font-weight: $fw-bold;
+        white-space: nowrap;
+        overflow: hidden;
+    		text-overflow: ellipsis;
       }
 
       i {
@@ -55,6 +75,15 @@
       align-items: center;
       cursor: pointer;
       transition: background .25s $cubic;
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+      }
 
       i {
         transition: color .25s $cubic;
@@ -99,6 +128,10 @@
         margin-bottom: .5rem;
         font-weight: $fw-bold;
         margin-right: 2rem;
+
+        &.outdated {
+          color: $yellow;
+        }
       }
 
       .control {
@@ -110,12 +143,26 @@
         cursor: pointer;
         transition: background .25s $cubic;
 
+        a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+        }
+
         &:hover {
           background: darken($white, 5%);
 
           &.entry__control--edit {
             i {
               color: darken($lighttypo, 30%);
+            }
+          }
+          &.entry__control--delete {
+            i {
+              color: $error;
             }
           }
         }

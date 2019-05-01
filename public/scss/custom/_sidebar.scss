@@ -1,3 +1,18 @@
 .sidebar {
   background: $white;
+  padding: 2rem;
+
+  .box {
+    background: $body;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    color: $typo;
+
+    > span {
+      flex: 1;
+      text-align: right;
+    }
+  }
 }
