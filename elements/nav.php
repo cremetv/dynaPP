@@ -22,7 +22,7 @@
   </ul>
 
   <div class="settings">
-    <a href="#!">
+    <a href="#!" data-tooltip="Settings" data-tooltip-position="right">
       <i class="material-icons">settings</i>
     </a>
   </div>
