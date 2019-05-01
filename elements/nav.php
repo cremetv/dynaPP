@@ -1,6 +1,6 @@
 <nav>
   <div class="logo">
-    L
+    d
   </div>
 
   <ul class="menu">
