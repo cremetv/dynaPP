@@ -228,6 +228,14 @@
               $logWas = $row['was'];
               $logIs = $row['isNow'];
 
+              if ($logUser == 1) {
+                $logUser = 'Ricardo';
+              } else if ($logUser == 2) {
+                $logUser = 'goodBoi';
+              } else if ($logUser == 3) {
+                $logUser = 'Dr. Phil';
+              }
+
               $logTime = strtotime($logTime);
               $logTime = date('d.m.Y H:i', $logTime);
               // get changes description
@@ -261,14 +269,14 @@
                   $logClientUpdatedAt = $clientRow['updatedAt'];
                 }
 
-                $changesDescription = str_replace('%user%', $logUser, $changesDescription);
-                $changesDescription = str_replace('%time%', $logTime, $changesDescription);
-                $changesDescription = str_replace('%oldValue%', $logWas, $changesDescription);
-                $changesDescription = str_replace('%value%', $logIs, $changesDescription);
-                $changesDescription = str_replace('%client%', $logClientName, $changesDescription);
+                $changesDescription = str_replace('%user%', '<span>' . $logUser . '</span>', $changesDescription);
+                $changesDescription = str_replace('%time%', '<span>' . $logTime . '</span>', $changesDescription);
+                $changesDescription = str_replace('%oldValue%', '<span>' . $logWas . '</span>', $changesDescription);
+                $changesDescription = str_replace('%value%', '<span>' . $logIs . '</span>', $changesDescription);
+                $changesDescription = str_replace('%client%', '<span>' . $logClientName . '</span>', $changesDescription);
 
                 if ($logElement != null) {
-                  $changesDescription = str_replace('%element%', $elName, $changesDescription);
+                  $changesDescription = str_replace('%element%', '<span>' . $elName . '</span>', $changesDescription);
                 }
                 ?>
                   <div class="log__entry" data-log="<?=$logId?>">

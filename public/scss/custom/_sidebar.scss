@@ -42,6 +42,11 @@
       line-height: 1.6;
       flex-shrink: 0;
 
+      span:not(.date) {
+        font-weight: $fw-bold;
+        color: $headings;
+      }
+
       + .log__entry {
         margin-top: 1rem;
       }
