@@ -76,3 +76,16 @@ var scrollLog = function scrollLog() {
 $(document).ready(function () {
   scrollLog();
 });
+
+//@prepros-append pages/clients.js
+
+if ($('body').hasClass('clients')) {
+  $(document).ready(function () {
+
+    $('#search').quicksearch('main .box--client', {
+      selector: 'h1'
+    });
+
+    $('#search').focus();
+  });
+}

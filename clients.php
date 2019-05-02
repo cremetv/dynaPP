@@ -9,13 +9,13 @@
 
     <link rel="stylesheet" href="./public/css/style.min.css?v=<?=date("YmdGis", filemtime('./public/css/style.min.css'))?>">
   </head>
-  <body>
+  <body class="clients">
 
     <?php require('elements/nav.php'); ?>
 
     <header>
       <div class="search-wrap">
-        <input type="text" class="search" placeholder="search">
+        <input id="search" type="text" class="search" placeholder="search">
       </div>
     </header>
 
@@ -51,6 +51,7 @@
             $clientId = $row['id'];
             $clientName = $row['name'];
             $clientAddress = $row['address'];
+            $clientLegalLink = $row['legalLink'];
             $clientCreatedAt = $row['createdAt'];
             $clientUpdatedAt = $row['updatedAt'];
 
@@ -84,10 +85,13 @@
               $outdatedDat = 'outdated';
             }
             ?>
-              <section class="box" client-id="<?=$clientId?>">
+              <section class="box box--client" client-id="<?=$clientId?>">
                 <div class="box__header">
                   <div class="box__header__title">
                     <h1><?=$clientName?></h1>
+                    <a href="<?=$clientLegalLink?>" target="_blank" class="open-extern">
+                      <i class="material-icons">launch</i>
+                    </a>
                     <?php
                       if ($impressumUpdate == '-' || $datenschutzUpdate == '-') {
                         ?>
@@ -259,6 +263,7 @@
 
                 $changesDescription = str_replace('%user%', $logUser, $changesDescription);
                 $changesDescription = str_replace('%time%', $logTime, $changesDescription);
+                $changesDescription = str_replace('%oldValue%', $logWas, $changesDescription);
                 $changesDescription = str_replace('%value%', $logIs, $changesDescription);
                 $changesDescription = str_replace('%client%', $logClientName, $changesDescription);
 
@@ -282,8 +287,9 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ScrollToPlugin.min.js"></script>
+    <script src="./public/js/components/quicksearch.min.js"></script>
     <script src="./public/js/main.min.js?v=<?=date("YmdGis", filemtime('./public/js/main.min.js'))?>"></script>
   </body>
 </html>

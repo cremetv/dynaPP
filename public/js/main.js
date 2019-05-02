@@ -15,3 +15,5 @@ const scrollLog = () => {
 $(document).ready(function() {
   scrollLog();
 });
+
+//@prepros-append pages/clients.js

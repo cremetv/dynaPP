@@ -4,9 +4,9 @@
   align-items: center;
   height: 3rem;
   line-height: 3rem;
-  background: $main;
+  background: $white;
   padding: 0 1rem;
-  color: $white;
+  color: $typo;
   text-decoration: none;
   font-size: 1.25rem;
   transition: background .25s $cubic, box-shadow .25s $cubic, transform .25s $cubic;
@@ -15,13 +15,13 @@
   user-select: none;
 
   &:hover {
-    background: lighten($main, 5%);
+    background: lighten($white, 5%);
     box-shadow: $depth-3;
     transform: translateY(-1px);
   }
 
   &:active {
-    background: darken($main, 4%);
+    background: darken($white, 4%);
     box-shadow: $depth-1;
     transform: translateY(1px);
   }
