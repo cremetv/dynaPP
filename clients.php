@@ -77,10 +77,10 @@
               $datenschutzUpdate = '-';
             }
 
-            if ($impressumUpdateTime < $rechtUpdateTime) {
+            if ($rowImp && $impressumUpdateTime < $rechtUpdateTime) {
               $outdatedImp = 'outdated';
             }
-            if ($datenschutzUpdateTime < $rechtUpdateTime) {
+            if ($rowDat && $datenschutzUpdateTime < $rechtUpdateTime) {
               $outdatedDat = 'outdated';
             }
             ?>
@@ -197,19 +197,93 @@
         }
       ?>
 
+
+      <a href="#!" class="add_client btn" data-tooltip="add client" data-tooltip-position="top">
+        <i class="material-icons success">add</i>
+      </a>
+
     </main>
 
     <div class="sidebar">
       <div class="box">
         Last update: <span><?=date('d.m.Y H:i', $rechtUpdateTime)?></span>
       </div>
+
+      <div class="log">
+        <?php
+          $sql = "SELECT * FROM log";
+          $result = $con->query($sql);
+          if ($result->rowCount() > 0) {
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+              $logId = $row['id'];
+              $logUser = $row['user'];
+              $logTime = $row['time'];
+              $logClient = $row['client'];
+              $logChanges = $row['changes'];
+              $logElement = $row['element'];
+              $logWas = $row['was'];
+              $logIs = $row['isNow'];
+
+              $logTime = strtotime($logTime);
+              $logTime = date('d.m.Y H:i', $logTime);
+              // get changes description
+              $sqlChanges = $con->prepare("SELECT * FROM changes WHERE name = '$logChanges' LIMIT 1");
+              $sqlChanges->execute();
+              $changeRow = $sqlChanges->fetch();
+              if ($changeRow) {
+                $changesDescription = $changeRow['description'];
+
+                // get element info
+                if ($logElement != null) {
+                  $sqlEl = $con->prepare("SELECT * FROM elements WHERE id = $logElement");
+                  $sqlEl->execute();
+                  $elRow = $sqlEl->fetch();
+                  if ($elRow) {
+                    $elName = $elRow['name'];
+                    $elCustom = $elRow['custom'];
+                    $elDescription = $elRow['description'];
+                    $elContent = $elRow['content'];
+                  }
+                }
+
+                // get client info
+                $sqlClient = $con->prepare("SELECT * FROM clients WHERE id = $logClient");
+                $sqlClient->execute();
+                $clientRow = $sqlClient->fetch();
+                if ($clientRow) {
+                  $logClientName = $clientRow['name'];
+                  $logclientAddress = $clientRow['address'];
+                  $logClientCreatedAt = $clientRow['createdAt'];
+                  $logClientUpdatedAt = $clientRow['updatedAt'];
+                }
+
+                $changesDescription = str_replace('%user%', $logUser, $changesDescription);
+                $changesDescription = str_replace('%time%', $logTime, $changesDescription);
+                $changesDescription = str_replace('%value%', $logIs, $changesDescription);
+                $changesDescription = str_replace('%client%', $logClientName, $changesDescription);
+
+                if ($logElement != null) {
+                  $changesDescription = str_replace('%element%', $elName, $changesDescription);
+                }
+                ?>
+                  <div class="log__entry" data-log="<?=$logId?>">
+                    <span class="date">@<?=$logTime?></span>
+                    <?=$changesDescription?>
+                  </div>
+                <?php
+              }
+            }
+          }
+        ?>
+      </div>
     </div>
 
     <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ScrollToPlugin.min.js"></script>
     <script src="./public/js/main.min.js?v=<?=date("YmdGis", filemtime('./public/js/main.min.js'))?>"></script>
   </body>
 </html>

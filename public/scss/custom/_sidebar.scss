@@ -1,18 +1,58 @@
 .sidebar {
   background: $white;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   .box {
-    background: $body;
+    background: $grey;
     padding: 1.5rem;
     display: flex;
     flex-direction: row;
     font-size: 1rem;
-    color: $typo;
+    color: $white;
+    margin: 2rem;
+    width: calc(100% - 4rem);
 
     > span {
+      color: $white;
       flex: 1;
       text-align: right;
+    }
+  }
+
+  .log {
+    flex: 1;
+    overflow: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: flex-end;
+    flex-wrap: nowrap;
+    max-height: 100%;
+    padding: 0 2rem;
+    padding-bottom: 2rem;
+    @include scrollbar(.5rem);
+
+    &__entry {
+      background: $body;
+      padding: 1.5rem;
+      font-size: 1rem;
+      color: $typo;
+      line-height: 1.6;
+      flex-shrink: 0;
+
+      + .log__entry {
+        margin-top: 1rem;
+      }
+
+      span.date {
+        display: block;
+        color: lighten($typo, 25%);
+        font-size: .9rem;
+        line-height: 1.6;
+        text-align: left;
+      }
     }
   }
 }

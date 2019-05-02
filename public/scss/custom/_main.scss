@@ -1,4 +1,5 @@
 main {
+  position: relative;
   background: $body;
   display: flex;
   flex-direction: column;
@@ -6,4 +7,28 @@ main {
   overflow: auto;
   padding: 2.5rem 2rem;
   @include scrollbar(.5rem, $lighttypo, $body);
+
+  .add_client {
+    position: fixed;
+    right: 26rem;
+    bottom: 1rem;
+    box-shadow: $depth-2;
+    background: $white;
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: $white;
+    }
+
+    &:active {
+      background: darken($white, 2%);
+    }
+
+    &:focus {
+      outline: 1px solid $main;
+    }
+  }
 }
