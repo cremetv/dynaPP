@@ -8,4 +8,9 @@
   box-shadow: $depth-3;
   opacity: 0;
   transform: translateY(100px);
+
+  &.error {
+    background: $error;
+    color: $white;
+  }
 }

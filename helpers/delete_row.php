@@ -1,12 +1,12 @@
 <?php
 
-include_once '..db.php';
+include_once '../db.php';
 
-$id = $_POST['id'];
 $table = $_POST['table'];
+$condition = $_POST['condition'];
 
 $con = DB::getConnection();
-$sql = "DELETE FROM $table WHERE id = $id";
+$sql = "DELETE FROM $table WHERE $condition";
 $result = $con->query($sql);
 $con = null;
 

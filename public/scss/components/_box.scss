@@ -2,10 +2,9 @@
   width: 100%;
   max-width: 900px;
   background: $white;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
   margin-bottom: 2.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
 
   &.show {
     background: $yellow;
@@ -17,19 +16,8 @@
 
   .material-icons {
     vertical-align: middle;
-    color: $lighttypo;
     font-size: 2rem;
     user-select: none;
-  }
-
-  .success {
-    color: $success;
-  }
-  .error {
-    color: $error;
-  }
-  .warning {
-    color: $yellow;
   }
 
   &__empty {
@@ -40,6 +28,12 @@
     .btn {
       margin-top: 2rem;
     }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
   }
 
   &__header {

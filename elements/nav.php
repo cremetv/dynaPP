@@ -22,12 +22,12 @@
 
   <ul class="menu">
     <li>
-      <a href="#!" data-tooltip="elements" data-tooltip-position="right">
+      <a href="elements.php" data-tooltip="elements" data-tooltip-position="right">
         <i class="material-icons">assignment</i>
       </a>
     </li>
     <li class="active">
-      <a href="#!" data-tooltip="clients" data-tooltip-position="right">
+      <a href="clients.php" data-tooltip="clients" data-tooltip-position="right">
         <i class="material-icons">supervisor_account</i>
       </a>
     </li>

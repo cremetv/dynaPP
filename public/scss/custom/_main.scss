@@ -1,3 +1,19 @@
+.material-icons {
+  color: $lighttypo;
+}
+.success {
+  color: $success;
+}
+.error {
+  color: $error;
+}
+.warning {
+  color: $yellow;
+}
+.info {
+  color: $blue;
+}
+
 main {
   position: relative;
   background: $body;

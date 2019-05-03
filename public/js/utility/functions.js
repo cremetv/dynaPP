@@ -20,7 +20,12 @@ const toast = (type, message) => {
   });
 }
 
-const ajaxCall = (post_data, url, response) => {
+// const ajaxCall = (post_data, url, response) => {
+const ajaxCall = (post_function_data, callback) => {
+  let post_data = post_function_data.post_data;
+  let url = post_function_data.url;
+  let response = post_function_data.response;
+
   let settings = {
     'async': true,
     'crossDomain': true,
@@ -30,14 +35,17 @@ const ajaxCall = (post_data, url, response) => {
     'headers': { 'cache-control': 'no-cache' }
   }
 
-  toast('success', response);
-
-  // $.ajax(settings).done(function(r) {
-  //   if (r == 'success' || r.includes('prepros')) {
-  //     !response ? response = 'success' : null;
-  //     toast('success', response);
-  //   } else {
-  //     toast('error', 'something went wrong!');
-  //   }
-  // });
+  $.ajax(settings).done(function(r) {
+    console.log('-----------');
+    console.log(r);
+    console.log('-----------');
+    if (r.startsWith('success')) {
+      !response ? response = 'success' : null;
+      toast('success', response);
+      callback('success');
+    } else {
+      toast('error', 'something went wrong!');
+      callback('error');
+    }
+  });
 }

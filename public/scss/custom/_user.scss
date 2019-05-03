@@ -46,6 +46,10 @@
       &:hover {
         background: darken($user, 5%);
       }
+
+      i {
+        color: $typo;
+      }
     }
   }
 }

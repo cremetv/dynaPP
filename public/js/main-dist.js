@@ -81,7 +81,12 @@ var toast = function toast(type, message) {
   });
 };
 
-var ajaxCall = function ajaxCall(post_data, url, response) {
+// const ajaxCall = (post_data, url, response) => {
+var ajaxCall = function ajaxCall(post_function_data, callback) {
+  var post_data = post_function_data.post_data;
+  var url = post_function_data.url;
+  var response = post_function_data.response;
+
   var settings = {
     'async': true,
     'crossDomain': true,
@@ -91,16 +96,19 @@ var ajaxCall = function ajaxCall(post_data, url, response) {
     'headers': { 'cache-control': 'no-cache' }
   };
 
-  toast('success', response);
-
-  // $.ajax(settings).done(function(r) {
-  //   if (r == 'success' || r.includes('prepros')) {
-  //     !response ? response = 'success' : null;
-  //     toast('success', response);
-  //   } else {
-  //     toast('error', 'something went wrong!');
-  //   }
-  // });
+  $.ajax(settings).done(function (r) {
+    console.log('-----------');
+    console.log(r);
+    console.log('-----------');
+    if (r.startsWith('success')) {
+      !response ? response = 'success' : null;
+      toast('success', response);
+      callback('success');
+    } else {
+      toast('error', 'something went wrong!');
+      callback('error');
+    }
+  });
 };
 
 /*! @license
@@ -118,14 +126,11 @@ var scrollLog = function scrollLog() {
   TweenLite.to(log, 2, { scrollTo: scrollHeight, ease: Power2.easeOut });
 };
 
-$(document).ready(function () {
-  scrollLog();
-});
-
 //@prepros-append pages/clients.js
 
 if ($('body').hasClass('clients')) {
   $(document).ready(function () {
+    scrollLog();
 
     $('#search').quicksearch('main .box--client', {
       selector: 'h1'
@@ -136,10 +141,29 @@ if ($('body').hasClass('clients')) {
   // actions
   var deleteClient = function deleteClient(id) {
     var post_data = {
-      'id': id,
+      // 'id': id,
+      'condition': 'id = ' + id,
       'table': 'clients'
     };
-    ajaxCall(post_data, 'helpers/delete_row.php', 'Client successfuly deleted');
+    var post_function_data = {
+      'post_data': post_data,
+      'url': 'helpers/delete_row.php',
+      'response': 'Client successfuly deleted'
+    };
+    ajaxCall(post_function_data, function (returnValue) {
+      console.log('RESPONSE:');
+      console.log(returnValue);
+      if (returnValue === 'success') {
+        var boxTarget = $('.box--client[client-id="' + id + '"]');
+        TweenMax.to(boxTarget, .25, {
+          height: 0,
+          ease: Power4.easeOut,
+          onComplete: function onComplete() {
+            boxTarget.remove();
+          }
+        });
+      }
+    });
   };
 
   // listeners

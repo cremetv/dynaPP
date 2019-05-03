@@ -1,5 +1,5 @@
 <?php
-  include_once('top.php');
+  include_once('elements/top.php');
 
   if (isset($_GET['id']) && $_GET['id'] != '' && is_numeric($_GET['id'])) {
     $id = $_GET['id'];

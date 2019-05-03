@@ -13,8 +13,4 @@ const scrollLog = () => {
   TweenLite.to(log, 2, {scrollTo: scrollHeight, ease:Power2.easeOut});
 }
 
-$(document).ready(function() {
-  scrollLog();
-});
-
 //@prepros-append pages/clients.js
