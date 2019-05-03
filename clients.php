@@ -108,7 +108,7 @@
                       }
                     ?>
                   </div>
-                  <div class="delete-client" data-tooltip="delete client">
+                  <div class="delete-client" client-id="<?=$clientId?>" data-tooltip="delete client">
                     <a href="#!">
                       <i class="material-icons">delete</i>
                     </a>

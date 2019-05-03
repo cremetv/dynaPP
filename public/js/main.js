@@ -4,6 +4,7 @@
 * © 2019 Marcel Hauser (https://ice-creme.de)
 */
 //@prepros-prepend components/tooltip.js
+//@prepros-prepend utility/functions.js
 
 /* scroll log to bottom */
 const scrollLog = () => {
