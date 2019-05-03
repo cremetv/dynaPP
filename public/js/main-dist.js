@@ -151,7 +151,6 @@ if ($('body').hasClass('clients')) {
       'response': 'Client successfuly deleted'
     };
     ajaxCall(post_function_data, function (returnValue) {
-      console.log('RESPONSE:');
       console.log(returnValue);
       if (returnValue === 'success') {
         var boxTarget = $('.box--client[client-id="' + id + '"]');
@@ -162,6 +161,59 @@ if ($('body').hasClass('clients')) {
             boxTarget.remove();
           }
         });
+      }
+    });
+  };
+
+  var addClient = function addClient() {
+    var clientName = $('#clientName').val(),
+        legalLink = $('#legalLink').val(),
+        businessType = $('#businessType').val(),
+        betreiber = $('#betreiber').val(),
+        vorname = $('#vorname').val(),
+        nachname = $('#nachname').val(),
+        bezeichnung = $('#bezeichnung').val(),
+        street = $('#street').val(),
+        additionalAddress = $('#additionalAddress').val(),
+        plz = $('#plz').val(),
+        city = $('#city').val(),
+        email = $('#email').val(),
+        tel = $('#tel').val(),
+        fax = $('#fax').val(),
+        vertretenDurch = $('#vertretenDurch').val();
+
+    var values = {
+      'clientName': clientName,
+      'legalLink': legalLink,
+      'businessType': businessType,
+      'betreiber': betreiber,
+      'vorname': vorname,
+      'nachname': nachname,
+      'bezeichnung': bezeichnung,
+      'street': street,
+      'additionalAddress': additionalAddress,
+      'plz': plz,
+      'city': city,
+      'email': email,
+      'tel': tel,
+      'fax': fax,
+      'vertretenDurch': vertretenDurch
+    };
+
+    var post_data = {
+      'table': 'clients',
+      'values': values
+    };
+
+    var post_function_data = {
+      'post_data': post_data,
+      'url': 'helpers/insert_row.php',
+      'response': 'Client successfuly created'
+    };
+    ajaxCall(post_function_data, function (returnValue) {
+      console.log(returnValue);
+      if (returnValue === 'success') {
+        // add new client to list or reload page
       }
     });
   };
