@@ -127,6 +127,7 @@ var scrollLog = function scrollLog() {
 };
 
 //@prepros-append pages/clients.js
+//@prepros-append pages/datenschutz.js
 
 if ($('body').hasClass('clients')) {
   $(document).ready(function () {
@@ -222,5 +223,34 @@ if ($('body').hasClass('clients')) {
   $('.delete-client').on('click', function () {
     var clientId = $(this).attr('client-id');
     deleteClient(clientId);
+  });
+}
+
+if ($('body').hasClass('datenschutz')) {
+  $(document).ready(function () {
+
+    var openInfo = function openInfo(el) {
+      var box = el.closest('.box');
+      var hint = box.find('.box__hint');
+      hint.toggleClass('box__hint--open');
+      if ($(hint).hasClass('box__hint--open')) {
+        TweenMax.set(hint, {
+          height: 'auto'
+        });
+        TweenMax.from(hint, .25, {
+          height: 0,
+          ease: Quad.easeInOut
+        });
+      } else {
+        TweenMax.to(hint, .25, {
+          height: 0,
+          ease: Quad.easeInOut
+        });
+      }
+    };
+
+    $('.open-info').on('click', function () {
+      openInfo($(this));
+    });
   });
 }

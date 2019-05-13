@@ -123,7 +123,7 @@
                         } else {
                           ?>
                             <div class="entry__control--edit control">
-                              <a href="#!">
+                              <a href="impressum?id=<?=$clientId?>">
                                 <i class="material-icons">edit</i>
                               </a>
                             </div>
@@ -158,7 +158,7 @@
                         } else {
                           ?>
                             <div class="entry__control--edit control">
-                              <a href="#!">
+                              <a href="datenschutz.php?id=<?=$clientId?>">
                                 <i class="material-icons">edit</i>
                               </a>
                             </div>

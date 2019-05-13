@@ -1,3 +1,8 @@
+.list-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
 .box {
   width: 100%;
   max-width: 900px;
@@ -5,14 +10,46 @@
   margin-bottom: 2.5rem;
   overflow: hidden;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
 
   &.show {
     background: $yellow;
   }
 
+  &--passive {
+    // background: $body;
+    // box-shadow: inset 0 0 0 1px darken($body, 10%);
+
+    // .box__header__title, .box__content, .action {
+    //   opacity: .6;
+    // }
+    //
+    // .checkbox-label {
+    //   background: darken($header, 5%);
+    // }
+  }
+
   // + .box {
   //   margin-top: 2.5rem;
   // }
+
+  &--element {
+    .box__header {
+      &__title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__name {
+          color: #D8D8D8;
+          font-size: 1rem;
+          font-weight: 700;
+          margin-bottom: .5rem;
+        }
+      }
+    }
+  }
 
   .material-icons {
     vertical-align: middle;
@@ -30,10 +67,53 @@
     }
   }
 
+  &__hint {
+    background: transparentize($blue, .8);
+    margin-top: 1rem;
+    overflow: hidden;
+    height: 0;
+
+    &__wrap {
+      padding: 1rem;
+      display: flex;
+      flex-direction: row;
+    }
+
+    &--open {
+      // height: auto;
+    }
+
+    &--icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: 2rem;
+      }
+    }
+
+    p {
+      margin-left: 1rem;
+      color: $typo;
+    }
+  }
+
+  &__check__wrapper {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 0 0 $body;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    flex: 1;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   &__header {
@@ -49,6 +129,10 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: flex-end;
+      max-width: calc(100% - 3rem);
+      white-space: nowrap;
+      overflow: hidden;
+  		text-overflow: ellipsis;
 
       h1 {
         margin: 0;
@@ -58,6 +142,7 @@
         white-space: nowrap;
         overflow: hidden;
     		text-overflow: ellipsis;
+        max-width: 100%;
       }
 
       .open-extern {
@@ -88,7 +173,7 @@
       }
     }
 
-    .delete-client {
+    .delete-client, .action {
       width: 3rem;
       height: 3rem;
       display: flex;
@@ -113,8 +198,16 @@
       &:hover {
         background: darken($white, 5%);
 
-        i {
-          color: $error;
+        // i {
+        //   color: $error;
+        // }
+      }
+
+      &.delete-client {
+        &:hover {
+          i {
+            color: $error;
+          }
         }
       }
     }
@@ -207,6 +300,13 @@
 
         }
       }
+    }
+  }
+
+  &__description {
+    .checkbox-text {
+      background: darken($white, 10%);
+      padding: .5rem;
     }
   }
 }

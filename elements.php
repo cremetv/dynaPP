@@ -1,15 +1,5 @@
 <?php include_once('elements/top.php'); ?>
 
-<?php
-if (!isset($_GET['id'])) {
-  // redirect
-} else {
-  $clientId = $_GET['id'];
-}
-?>
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="de" dir="ltr" class="grid-template">
   <head>
@@ -50,9 +40,6 @@ if (!isset($_GET['id'])) {
         if ($result->rowCount() > 0) {
           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $elName = $row['name'];
-            $elCategory = $row['category'];
-            $elSelectOption = $row['selectOption'];
-            $elType = $row['type'];
             $elTitle = $row['title'];
             $elDescription = $row['description'];
             $elHint = $row['hint'];
@@ -115,9 +102,6 @@ if (!isset($_GET['id'])) {
         if ($result->rowCount() > 0) {
           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $elName = $row['name'];
-            $elCategory = $row['category'];
-            $elSelectOption = $row['selectOption'];
-            $elType = $row['type'];
             $elTitle = $row['title'];
             $elDescription = $row['description'];
             $elHint = $row['hint'];
@@ -175,9 +159,6 @@ if (!isset($_GET['id'])) {
         if ($result->rowCount() > 0) {
           while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $elName = $row['name'];
-            $elCategory = $row['category'];
-            $elSelectOption = $row['selectOption'];
-            $elType = $row['type'];
             $elTitle = $row['title'];
             $elDescription = $row['description'];
             $elHint = $row['hint'];

@@ -14,3 +14,4 @@ const scrollLog = () => {
 }
 
 //@prepros-append pages/clients.js
+//@prepros-append pages/datenschutz.js
