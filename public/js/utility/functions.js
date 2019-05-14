@@ -43,9 +43,9 @@ const ajaxCall = (post_function_data, callback) => {
   }
 
   $.ajax(settings).done(function(r) {
-    // console.log('-----------');
-    // console.log(r);
-    // console.log('-----------');
+    console.log('-----------');
+    console.log(r);
+    console.log('-----------');
     if (r.startsWith('success')) {
       !response ? response = 'success' : null;
       toast(responseType, response);

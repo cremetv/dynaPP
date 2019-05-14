@@ -104,9 +104,9 @@ var ajaxCall = function ajaxCall(post_function_data, callback) {
   };
 
   $.ajax(settings).done(function (r) {
-    // console.log('-----------');
-    // console.log(r);
-    // console.log('-----------');
+    console.log('-----------');
+    console.log(r);
+    console.log('-----------');
     if (r.startsWith('success')) {
       !response ? response = 'success' : null;
       toast(responseType, response);
@@ -286,7 +286,10 @@ if ($('body').hasClass('datenschutz')) {
       } else {
         // is not checked => now checked
         target = 'helpers/add_row.php';
-        condition = [clientId, elId];
+        condition = {
+          'clientId': clientId,
+          'elementId': elId
+        };
         responseType = 'success';
         response = '✔ added';
       }

@@ -51,7 +51,10 @@ if ($('body').hasClass('datenschutz')) {
       } else {
         // is not checked => now checked
         target = 'helpers/add_row.php';
-        condition = [clientId, elId];
+        condition = {
+          'clientId': clientId,
+          'elementId': elId
+        }
         responseType = 'success';
         response = '✔ added';
       }
