@@ -52,7 +52,7 @@
 
     <link rel="stylesheet" href="./public/css/style.min.css?v=<?=date("YmdGis", filemtime('./public/css/style.min.css'))?>">
   </head>
-  <body class="datenschutz">
+  <body class="datenschutz" data-client="<?=$clientId?>">
 
     <?php require('elements/nav.php'); ?>
 
@@ -89,8 +89,8 @@
             <div class="box box--element">
               <div class="box__check__wrapper">
                 <label class="checkbox">
-                  <input type="checkbox" <?php if (in_array($elId, $clientElements) || $elRequired == 1) { echo 'checked'; } ?> <?php if ($elRequired == 1) {echo 'disabled';} ?>>
-                  <span class="checkbox-label"></span>
+                  <input class="check" data-element="<?=$elId?>" type="checkbox" <?php if (in_array($elId, $clientElements) || $elRequired == 1) { echo 'checked'; } ?> <?php if ($elRequired == 1) {echo 'disabled';} ?>>
+                  <span class="checkbox-label" <?php if ($elRequired == 1) {echo 'data-tooltip="Pflichtangabe" data-tooltip-position="left"';}?>></span>
                 </label>
               </div>
               <div class="box__wrapper">

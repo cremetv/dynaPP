@@ -1,3 +1,5 @@
+let toasts = 0;
+
 const toast = (type, message) => {
   const tl = new TimelineMax();
   const toastEl = $(`<div class="toast ${type}">${message}</div>`);
@@ -6,8 +8,11 @@ const toast = (type, message) => {
 
   tl.to(toastEl, .25, {
     opacity: 1,
-    y: 0,
+    y: 0 + (66 * toasts),
     ease: Power4.easeOut,
+    onComplete: function() {
+      toasts++;
+    }
   });
   tl.to(toastEl, .5, {
     delay: 2,
@@ -16,6 +21,7 @@ const toast = (type, message) => {
     ease: Power4.easeOut,
     onComplete: function() {
       toastEl.remove();
+      toasts--;
     }
   });
 }
@@ -24,6 +30,7 @@ const toast = (type, message) => {
 const ajaxCall = (post_function_data, callback) => {
   let post_data = post_function_data.post_data;
   let url = post_function_data.url;
+  let responseType = post_function_data.responseType;
   let response = post_function_data.response;
 
   let settings = {
@@ -36,12 +43,12 @@ const ajaxCall = (post_function_data, callback) => {
   }
 
   $.ajax(settings).done(function(r) {
-    console.log('-----------');
-    console.log(r);
-    console.log('-----------');
+    // console.log('-----------');
+    // console.log(r);
+    // console.log('-----------');
     if (r.startsWith('success')) {
       !response ? response = 'success' : null;
-      toast('success', response);
+      toast(responseType, response);
       callback('success');
     } else {
       toast('error', 'something went wrong!');

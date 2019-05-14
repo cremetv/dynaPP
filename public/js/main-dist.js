@@ -59,6 +59,8 @@ $('document').ready(function () {
   }).on('mouseout', hideTooltip);
 });
 
+var toasts = 0;
+
 var toast = function toast(type, message) {
   var tl = new TimelineMax();
   var toastEl = $('<div class="toast ' + type + '">' + message + '</div>');
@@ -67,8 +69,11 @@ var toast = function toast(type, message) {
 
   tl.to(toastEl, .25, {
     opacity: 1,
-    y: 0,
-    ease: Power4.easeOut
+    y: 0 + 66 * toasts,
+    ease: Power4.easeOut,
+    onComplete: function onComplete() {
+      toasts++;
+    }
   });
   tl.to(toastEl, .5, {
     delay: 2,
@@ -77,6 +82,7 @@ var toast = function toast(type, message) {
     ease: Power4.easeOut,
     onComplete: function onComplete() {
       toastEl.remove();
+      toasts--;
     }
   });
 };
@@ -85,6 +91,7 @@ var toast = function toast(type, message) {
 var ajaxCall = function ajaxCall(post_function_data, callback) {
   var post_data = post_function_data.post_data;
   var url = post_function_data.url;
+  var responseType = post_function_data.responseType;
   var response = post_function_data.response;
 
   var settings = {
@@ -97,12 +104,12 @@ var ajaxCall = function ajaxCall(post_function_data, callback) {
   };
 
   $.ajax(settings).done(function (r) {
-    console.log('-----------');
-    console.log(r);
-    console.log('-----------');
+    // console.log('-----------');
+    // console.log(r);
+    // console.log('-----------');
     if (r.startsWith('success')) {
       !response ? response = 'success' : null;
-      toast('success', response);
+      toast(responseType, response);
       callback('success');
     } else {
       toast('error', 'something went wrong!');
@@ -149,6 +156,7 @@ if ($('body').hasClass('clients')) {
     var post_function_data = {
       'post_data': post_data,
       'url': 'helpers/delete_row.php',
+      'responseType': 'success',
       'response': 'Client successfuly deleted'
     };
     ajaxCall(post_function_data, function (returnValue) {
@@ -229,6 +237,10 @@ if ($('body').hasClass('clients')) {
 if ($('body').hasClass('datenschutz')) {
   $(document).ready(function () {
 
+    $('#search').quicksearch('main .box--element', {
+      selector: 'h1'
+    });
+
     var openInfo = function openInfo(el) {
       var box = el.closest('.box');
       var hint = box.find('.box__hint');
@@ -252,5 +264,55 @@ if ($('body').hasClass('datenschutz')) {
     $('.open-info').on('click', function () {
       openInfo($(this));
     });
+
+    var updateDatenschutz = function updateDatenschutz(el) {
+      var disabled = $(el).prev('input.check').attr('disabled');
+      if (disabled) return;
+
+      var elId = $(el).prev('input.check').attr('data-element');
+      var clientId = $('body').attr('data-client');
+      var table = 'datenschutz';
+      var target = void 0,
+          condition = void 0,
+          responseType = void 0,
+          response = void 0;
+
+      if ($(el).prev('input.check').prop('checked')) {
+        // is checked => is now unchecked
+        target = 'helpers/delete_row.php';
+        condition = 'clientId = ' + clientId + ' AND elementId = ' + elId;
+        responseType = 'error';
+        response = '❌ removed';
+      } else {
+        // is not checked => now checked
+        target = 'helpers/add_row.php';
+        condition = [clientId, elId];
+        responseType = 'success';
+        response = '✔ added';
+      }
+
+      var post_data = {
+        'table': table,
+        'condition': condition
+      };
+
+      var post_function_data = {
+        'post_data': post_data,
+        'url': target,
+        'responseType': responseType,
+        'response': response
+      };
+
+      ajaxCall(post_function_data, function (returnValue) {
+        if (returnValue === 'success') {
+          // console.log('Success =)');
+        }
+      });
+    };
+
+    $('.checkbox-label').on('click', function () {
+      updateDatenschutz($(this));
+    });
   });
 }
+//# sourceMappingURL=main-dist.js.map

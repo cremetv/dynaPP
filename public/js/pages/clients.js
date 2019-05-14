@@ -19,6 +19,7 @@ if ($('body').hasClass('clients')) {
     let post_function_data = {
       'post_data': post_data,
       'url': 'helpers/delete_row.php',
+      'responseType': 'success',
       'response': 'Client successfuly deleted',
     }
     ajaxCall(post_function_data, function(returnValue) {
